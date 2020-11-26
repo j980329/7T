@@ -1,4 +1,4 @@
-# qt
+# 7T
 
 ## Project setup
 ```
