@@ -51,6 +51,7 @@ loginForm: {
           if(!valid) return
         //   上传用户名和密码到login地址中 基础地址在amin中
           const {data:res} = await this.$axios.post('login',this.loginForm)
+          console.log(res)
         //   如果状态不等于200 则返回登录失败 并不执行以下代码，否之 这条就当不存在
         if(res.meta.status !==200)return this.$message.error('登录失败')
         this.$message.success('登录成功')
