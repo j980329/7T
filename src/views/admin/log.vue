@@ -6,9 +6,9 @@
       <!--       双向绑定到数组里的username       -->
     <el-input v-model="loginForm.username"></el-input>
   </el-form-item>
-  <el-form-item label="密码" prop="password">
+  <el-form-item label="密码" prop="password" >
       <!-- 双向绑定到数组里的password -->
-    <el-input v-model="loginForm.password"></el-input>
+    <el-input v-model="loginForm.password" @keyup.enter.native="login"></el-input>
   </el-form-item>
 
   <el-form-item>
@@ -44,8 +44,11 @@ loginForm: {
       };
     },
     methods: {
+    l(){
+console.log("艾呀")
+    },
  login() {
-    //  ref绑定的数值 用$refs.数值使用   async 异步
+    //  ref绑定的数值 用$refs.数值使用   async 异步  validate是element的表单校验方法
         this.$refs.logref.validate(async valid => {
             // 不是valid 就不执行之后的
           if(!valid) return
@@ -61,9 +64,9 @@ loginForm: {
         this.$router.push('/home')
         });
       },
-//调用重置方法
+
       resetLoginForm() {
-        //   resetFields是重置方法
+        //   resetFields是element的重置方法
         this.$refs.logref.resetFields();
       }
     },
