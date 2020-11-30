@@ -20,6 +20,13 @@ axios.interceptors.request.use(config => {
 // 使用$axios
 Vue.prototype.$axios = axios
 
+// import ZkTable from 'vue-table-with-tree-grid'
+ 
+// Vue.use(ZkTable)
+
+import tree from 'vue-table-with-tree-grid'
+Vue.component('tree', tree)
+
 import echarts from 'echarts';
 Vue.prototype.echarts = echarts;
 
