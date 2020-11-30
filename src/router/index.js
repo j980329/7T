@@ -2,14 +2,27 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import home from '../views/admin/home.vue'
 import login from '../views/admin/log.vue'
+import users from '../views/admin/user.vue'
+import roles from '../views/admin/roles.vue'
+import rights from '../views/admin/rights.vue'
+import reports from '../views/admin/reports.vue'
+
 Vue.use(Router)
                 // Router要和上面的Router同名
 const router = new Router({
   // 使用routes路由
 routes:[
   {path: '/',redirect: '/login'},
-  {path: '/home',component: home},
+  {path: '/home',component: home,children:[
+     {path: '/users',component: users},
+      {path: '/reports',component: reports},
+      {path: '/rights',component: rights},
+     {path: '/roles',component: roles},
+
+  ]},
+
   {path: '/login',component: login},
+ 
 ]
 })
 //路由守卫
@@ -23,5 +36,7 @@ router.beforeEach((to, from, next)=>{
   // 放行
   next()
 })
+
+
 
 export default router

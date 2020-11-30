@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="box">
+    <div class="login">
     <!-- 双向绑定  (绑定到数组里)              正则验证       ref和refs绑定                 -->
 <el-form :model="loginForm" :rules="rules" ref="logref" label-width="100px" class="demo-loginForm">
   <el-form-item label="用户名" prop="username">
@@ -19,6 +20,7 @@
   </el-form-item>
 </el-form>
     </div>
+</div>
 </template>
 
 <script>
@@ -80,5 +82,19 @@ watch:{},
 </script>
 
 <style scoped>
-
+.box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+}
+.login {
+  width: 30%;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 5px 15px;
+  border-radius: 5px;
+  box-shadow: 1px 3px 6px rgba(80, 80, 80, 0.8);
+}
 </style>
