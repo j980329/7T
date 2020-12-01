@@ -2,7 +2,7 @@
   <div>
     <!-- 面包屑导航区域 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/login/user' }">用户首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/home' }">用户首页</el-breadcrumb-item>
       <el-breadcrumb-item>商品管理</el-breadcrumb-item>
       <el-breadcrumb-item>分类列表</el-breadcrumb-item>
     </el-breadcrumb>
@@ -35,8 +35,8 @@
           <el-tag type="warning" v-else>三级</el-tag>
         </template>
         <template slot="active" slot-scope="scope">
-          <el-button size="mini" type="primary" icon="el-icon-edit">编辑</el-button>
-          <el-button size="mini" type="danger" icon="el-icon-delete">删除</el-button>
+          <el-button size="mini" type="primary" icon="el-icon-edit" @click="bianji(scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" icon="el-icon-delete" @click="del(scope.row)">删除</el-button>
         </template>
       </tree>
       <!-- 分页区域 -->
@@ -76,6 +76,24 @@
         <el-button type="primary" @click="addCrte">确 定</el-button>
       </div>
     </el-dialog>
+
+<el-dialog title="编辑分类" :visible.sync="show">
+      <el-form :model="changeRoles" :rules="addCateFormRules">
+        <el-form-item label="分类名称" :label-width="'80px'" prop="roleName">
+          <el-input
+            v-model="changeRoles.cat_name"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+      
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="show = false">取 消</el-button>
+        <el-button type="primary" @click="bj">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    
   </div>
 </template>
 
@@ -91,6 +109,7 @@ export default {
         pagesize: 5, //每页显示多少条
         pagenum: 1 //显示第几页
       },
+      show:false,
       total: 0,
       // 为表格定义指定列的数据
       columns: [
@@ -141,13 +160,18 @@ export default {
       },
       //   选中的父级分类的ID
       selectKeys: [],
+      changeRoles:{
+        cat_name:""
+      },
       // 验证规则
       addCateFormRules: {
         cat_name: [
           { required: true, message: "请输入分类名称", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ]
-      }
+      },
+      cat_id:0,
+      cat_name:""
     };
   },
   created() {this.getGoodsList();},
@@ -205,7 +229,7 @@ export default {
       // 反之证明没选中
       if (this.selectKeys.length > 0) {
         // 父级分类的ID
-        cat_pid: 0,
+        // cat_pid: 0,
           (this.addCateForm.cat_pid = this.selectKeys[
             this.selectKeys.length - 1
           ]);
@@ -240,6 +264,32 @@ export default {
           });
       });
     },
+async del(id){
+  console.log(id.cat_id)
+      const {data:res} = await this.$axios.delete(`categories/${id.cat_id}`)
+      console.log(res)
+      if(res.meta.status !==200) return this.$message.error("删除失败")
+        this.$message.success('删除成功')
+        this.getGoodsList();
+},
+bianji(res){
+  console.log(res)
+this.changeRoles = res;
+this.cat_id=res.cat_id
+this.cat_name=res.cat_name
+this.show=true
+},
+
+async bj(){
+const {data:res}=await this.$axios.put(`categories/${this.changeRoles.cat_id}`,
+this.changeRoles)
+console.log(res)
+if(res.meta.status !==200) return this.$message.error('失败了呢')
+this.$message.success('恭喜您修改成功~')
+this.show=false
+this.getGoodsList();
+},
+
     // 监听对话框关闭事件
     addCrteClose() {
       this.$refs.addCateFormRef.resetFields();

@@ -9,6 +9,8 @@ import rights from '../views/admin/rights.vue'
 import reports from '../views/admin/reports.vue'
 import syy from '../views/admin/syy.vue'
 import categories from '../views/admin/categories.vue'
+import goods from '../views/admin/goods.vue'
+import zhu from '../views/admin/zhu.vue'
 Vue.use(Router)
 // Router要和上面的Router同名
 const router = new Router({
@@ -16,13 +18,15 @@ const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     {
-      path: '/home', component: home, children: [
+      path: '/zhu', component: zhu, children: [
+        { path: '/home', component: home },
         { path: '/users', component: users },
         { path: '/reports', component: reports },
         { path: '/rights', component: rights },
         { path: '/roles', component: roles },
         { path: '/syy', component: syy },
         { path: '/categories', component: categories },
+        { path: '/goods', component: goods },
       ]
     },
 
