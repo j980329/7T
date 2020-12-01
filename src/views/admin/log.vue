@@ -1,6 +1,7 @@
 <template>
     <div class="box">
     <div class="login">
+      <h1 class="hogo"><i>后台管理登录页</i></h1>
     <!-- 双向绑定  (绑定到数组里)              正则验证       ref和refs绑定                 -->
 <el-form :model="loginForm" :rules="rules" ref="logref" label-width="100px" class="demo-loginForm">
   <el-form-item label="用户名" prop="username">
@@ -20,10 +21,24 @@
   </el-form-item>
 </el-form>
     </div>
+<div id="circle1">
+      <div id="inner-cirlce1">
+        <h2> </h2>
+      </div>
+    </div>
+
+
+
+
+
+
 </div>
 </template>
 
 <script>
+// import '../../ysk/css/default.css'
+// import '../../ysk/css/normalize.css'
+import '../../ysk/css/styles.css'
 export default {
     data() {
         return {
