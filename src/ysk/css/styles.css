@@ -9,9 +9,9 @@ html {
   background-size: cover;
   font-size: 10px;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
-  text-align: center;
+  /* text-align: center; */
   width: 100%;
 }
 

@@ -12,6 +12,8 @@ import categories from '../views/admin/categories.vue'
 import goods from '../views/admin/goods.vue'
 import zhu from '../views/admin/zhu.vue'
 import params from '../views/admin/params.vue'
+import orders from '../views/admin/orders.vue'
+import list from '../views/admin/list.vue'
 Vue.use(Router)
 // Router要和上面的Router同名
 const router = new Router({
@@ -27,8 +29,10 @@ const router = new Router({
         { path: '/roles', component: roles },
         { path: '/syy', component: syy },
         { path: '/categories', component: categories },
-        { path: '/goods', component: goods },
-        { path: '/params', component: params }
+        { path: '/goods', component: list },
+        { path: '/params', component: params },
+{ path: '/orders', component: orders },
+{ path: '/goods/add', component: goods },
       ]
     },
 

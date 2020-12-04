@@ -73,7 +73,8 @@ export default {
      user:JSON.parse(localStorage.getItem('ip'))||{ 'cname':"",'ip':''},
                
           
-menulist:[],
+
+menulist:JSON.parse(localStorage.getItem('menulist'))||[],
 iconsObj:{
   '125':'iconfont icon-user',
   '103':'iconfont icon-tijikongjian',
@@ -112,6 +113,7 @@ async getMenuList(){
   const {data:res}=await this.$axios.get('menus')
   if(res.meta.status !==200) return this.$message.error(res.meta.msg)
   this.menulist = res.data
+  localStorage.setItem('menulist',JSON.stringify(this.menulist))
 console.log(res)
 },
 toggleCollapse(){
